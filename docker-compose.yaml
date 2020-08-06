@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  server:
+    image: lomo/netxms-server
+    ports:
+    - "4700:4700"
+
+  webui:
+    image: lomo/netxms-webui
+    ports:
+    - "8080:8080"
+    environment:
+    - "NETXMS_SERVER=server"
+
+  console:
+    image: lomo/netxms-nxmc
+    environment:
+    - "DISPLAY=$DISPLAY"
+    volumes:
+    - "/tmp/.X11-unix:/tmp/.X11-unix"
